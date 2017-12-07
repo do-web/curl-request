@@ -9,8 +9,14 @@ module.exports = (function () {
     this['default'] = {
         torControlHost: 'localhost',
         torControlPort: 9051,
-        autoParse: true // content-type detect -> json
+        autoParse: true, // content-type detect -> json
+        verbose: false,
+        useProxy: false,
+        proxy: 'localhost:9050',
+        proxyType: Curl.proxy.SOCKS5_HOSTNAME
     };
+
+    this.libcurl = Curl;
 
     this.curl = new Curl();
 
@@ -51,11 +57,6 @@ module.exports = (function () {
             fieldsObj = querystring.stringify(fieldsObj)
         }
         curl.setOpt(Curl.option.POSTFIELDS, fieldsObj);
-        return this;
-    };
-
-    this.setVerbose = (verbose) => {
-        this.curl.setOpt(Curl.option.VERBOSE, verbose);
         return this;
     };
 
@@ -128,6 +129,13 @@ module.exports = (function () {
     };
 
     this._submit = () => {
+
+        this.curl.setOpt(Curl.option.VERBOSE, this['default'].verbose);
+
+        if(this['default'].useProxy) {
+            this.setProxy(this['default'].proxy, this['default'].proxyType);
+        }
+
         return new Promise((resolve, reject) => {
 
             try {

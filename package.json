@@ -1,6 +1,6 @@
 {
   "name": "curl-request",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "cURL node wrapper with promises. Support http, https and proxies and more. All cURL options. Tor-Proxy support.",
   "main": "index.js",
   "repository": {

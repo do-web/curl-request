@@ -90,7 +90,11 @@ curl
 
 ```js
 // Set tor proxy
-curl.setProxy('localhost:9050');
+curl.default.useProxy = true;
+curl.default.proxy =  'localhost:9050';
+curl.default.proxyType = curl.libcurl.proxy.SOCKS5_HOSTNAME;
+curl.default.torControlHost = 'localhost';
+curl.default.torControlPort = 9051;
 ```
 
 ```js
@@ -100,7 +104,7 @@ curl.newTorIdentity();
 
 ```js
 // Verbose output
-curl.setVerbose(true);
+curl.default.verbose = true;
 ```
 
 ## Contributing
