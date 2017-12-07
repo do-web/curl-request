@@ -1,0 +1,36 @@
+{
+  "name": "curl-request",
+  "version": "1.0.0",
+  "description": "cURL node wrapper with promises. Support http, https and proxies and more. All cURL options. Tor-Proxy support.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/do-web/curl-request.git"
+  },
+  "keywords": [
+    "curl",
+    "promises",
+    "request",
+    "https",
+    "ssl",
+    "tor",
+    "proxy",
+    "file-upload",
+    "fileupload",
+    "headers",
+    "ssl",
+    "auth",
+    "http"
+  ],
+  "author": "Dominik Weber",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/do-web/curl-request/issues"
+  },
+  "homepage": "https://github.com/do-web/curl-request#readme",
+  "dependencies": {
+    "net": "^1.0.2",
+    "node-libcurl": "^1.2.0",
+    "querystring": "^0.2.0"
+  }
+}
