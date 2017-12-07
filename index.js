@@ -123,33 +123,43 @@ module.exports = (function () {
         return nHeaders;
     };
 
+    this._reset = () => {
+        this.curl = new Curl();
+    };
+
     this._submit = () => {
         return new Promise((resolve, reject) => {
 
-            this.curl.on('end', function (statusCode, body, headers) {
+            try {
+                this.curl.on('end', function (statusCode, body, headers) {
 
-                headers = normalizeHeaders(headers);
+                    headers = normalizeHeaders(headers);
 
-                if (that.default.autoParse) {
-                    if (typeof headers['content-type'] !== 'undefined' &&
-                        headers['content-type'].toLocaleLowerCase() === 'application/json') {
-                        try {
-                            let jsonObj = JSON.parse(body);
-                            body = jsonObj;
-                        } catch (e) {
+                    if (that.default.autoParse) {
+                        if (typeof headers['content-type'] !== 'undefined' &&
+                            headers['content-type'].toLocaleLowerCase() === 'application/json') {
+                            try {
+                                let jsonObj = JSON.parse(body);
+                                body = jsonObj;
+                            } catch (e) {
+                            }
                         }
                     }
-                }
 
-                resolve({statusCode, body, headers});
-                this.close();
-            });
+                    resolve({statusCode, body, headers});
+                    this.close();
+                    that._reset();
+                });
 
-            this.curl.on('error', function () {
-                reject(arguments);
-                this.close();
-            });
-            this.curl.perform();
+                this.curl.on('error', function () {
+                    reject(arguments);
+                    this.close();
+                    that._reset();
+                });
+                this.curl.perform();
+            } catch(e) {
+                reject(e);
+            }
         });
     };
 
