@@ -2,7 +2,6 @@
 
 [![License][npm-license]][license-url]
 [![Downloads][npm-downloads]][npm-url]
-[![Gitter][gitter-image]][gitter-url]
 
 cURL Request is a cURL wrapper, support all options and infos from cURL.
 
