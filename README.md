@@ -31,7 +31,7 @@ If you have problems installing the dependencies, use this to build it from sour
 $ npm install node-libcurl --build-from-source 
 ```
 
-## Useage
+## Usage
 
 ```js
 const curl = require( 'curl-request' );
