@@ -46,7 +46,11 @@ module.exports = (function () {
     };
 
     this.setBody = (fieldsObj) => {
-        curl.setOpt(Curl.option.POSTFIELDS, querystring.stringify(fieldsObj));
+
+        if(typeof fieldsObj !== 'string') {
+            fieldsObj = querystring.stringify(fieldsObj)
+        }
+        curl.setOpt(Curl.option.POSTFIELDS, fieldsObj);
         return this;
     };
 
