@@ -34,7 +34,6 @@ $ npm install node-libcurl --build-from-source
 ## Useage
 
 ```js
-
 const curl = require( 'curl-request' );
 
 curl.setHeaders([
@@ -47,23 +46,28 @@ curl.setHeaders([
 .catch((e) => {
     console.log(e);
 });
+```
 
-curl.post('https://www.google.com')
+```js
+curl
 .setBody({
  'input-arr[0]': 'input-arr-val0',
  'input-arr[1]': 'input-arr-val1',
  'input-arr[2]': 'input-arr-val2',
  'input-name': 'input-val'
 })
+.post('https://www.google.com')
 .then(({statusCode, body, headers}) => {
     console.log(statusCode, body, headers)
 })
 .catch((e) => {
     console.log(e);
 });
+```
 
+```js
 // File upload
-curl.post('https://www.google.com')
+curl
 .setHeaders([
     'Content-Type: multipart/form-data'
 ])
@@ -75,22 +79,28 @@ curl.post('https://www.google.com')
   file: './yourimage.png',
   type: 'image/png'
 }])
+.post('https://www.google.com')
 .then(({statusCode, body, headers}) => {
     console.log(statusCode, body, headers)
 })
 .catch((e) => {
     console.log(e);
 });
+```
 
+```js
 // Set tor proxy
 curl.setProxy('localhost:9050');
+```
 
+```js
 // New tor identity
 curl.newTorIdentity();
+```
 
+```js
 // Verbose output
 curl.setVerbose(true);
-
 ```
 
 ## Contributing
