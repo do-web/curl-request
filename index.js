@@ -114,10 +114,14 @@ module.exports = (function () {
     let normalizeHeaders = (headers) => {
         // normalize headers
         let nHeaders = {};
-        if (headers.length) {
-            Object.keys(headers[0]).forEach((k) => {
-                nHeaders[k.toString().toLocaleLowerCase()] = headers[0][k];
-            });
+        if (Array.isArray(headers)) {
+            let mergedHeaders = {};
+            for(let i in headers) {
+                mergedHeaders = Object.assign(mergedHeaders, headers[i]);
+            }
+            for(let k in mergedHeaders) {
+                nHeaders[k.toString().toLocaleLowerCase()] = mergedHeaders[k];
+            }
         }
         return nHeaders;
     };
