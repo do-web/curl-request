@@ -54,7 +54,7 @@ module.exports = function () {
         if (typeof fieldsObj !== 'string') {
             fieldsObj = querystring.stringify(fieldsObj)
         }
-        curl.setOpt(Curl.option.POSTFIELDS, fieldsObj);
+        this.curl.setOpt(Curl.option.POSTFIELDS, fieldsObj);
         return this;
     };
 
