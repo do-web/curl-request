@@ -2,7 +2,7 @@ const Curl = require('node-libcurl').Curl;
 const Net = require('net');
 const querystring = require('querystring');
 
-module.exports = (function () {
+module.exports = function () {
 
     this['default'] = {
         torControlHost: 'localhost',
@@ -174,4 +174,4 @@ module.exports = (function () {
     };
 
     return this;
-})();
+};

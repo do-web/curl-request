@@ -22,7 +22,7 @@ $ npm install curl-request --save
 After installing the `npm` package you can now start simplifying requests like so:
 
 ```js
-const curl = require('curl-request');
+const curl = new (require( 'curl-request' ))();
 ```
 
 If you have problems installing the dependencies, use this to build it from source:
@@ -34,7 +34,7 @@ $ npm install node-libcurl --build-from-source
 ## Usage
 
 ```js
-const curl = require( 'curl-request' );
+const curl = new (require( 'curl-request' ))();
 
 curl.setHeaders([
     'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'
@@ -107,6 +107,7 @@ curl.newTorIdentity();
 curl.default.verbose = true;
 ```
 
+##
 ## Contributing
 
 1. Fork it
