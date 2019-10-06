@@ -120,7 +120,8 @@ module.exports = function () {
                 mergedHeaders = Object.assign(mergedHeaders, headers[i]);
             }
             for(let k in mergedHeaders) {
-                nHeaders[k.toString().toLocaleLowerCase()] = mergedHeaders[k];
+		let lc = k.toString().toLocaleLowerCase();
+                nHeaders[lc in nHeaders ? lc : k.toString()] = mergedHeaders[k];
             }
         }
         return nHeaders;
