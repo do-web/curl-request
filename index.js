@@ -1,4 +1,6 @@
-const Curl = require('node-libcurl').Curl;
+const LibCurl = require('node-libcurl');
+const Curl = LibCurl.Curl;
+const Proxy = LibCurl.CurlProxy;
 const Net = require('net');
 const querystring = require('querystring');
 
@@ -11,7 +13,7 @@ module.exports = function () {
         verbose: false,
         useProxy: false,
         proxy: 'localhost:9050',
-        proxyType: Curl.proxy.SOCKS5_HOSTNAME
+        proxyType: Proxy.Socks5Hostname
     };
 
     this.libcurl = Curl;
@@ -63,7 +65,7 @@ module.exports = function () {
 
         // SOCKS5 default
         if (typeof proxyType === 'undefined') {
-            this.curl.setOpt(Curl.option.PROXYTYPE, Curl.proxy.SOCKS5_HOSTNAME);
+            this.curl.setOpt(Curl.option.PROXYTYPE, Proxy.Socks5Hostname);
         } else {
             this.curl.setOpt(Curl.option.PROXYTYPE, proxyType);
         }
@@ -120,7 +122,8 @@ module.exports = function () {
                 mergedHeaders = Object.assign(mergedHeaders, headers[i]);
             }
             for(let k in mergedHeaders) {
-                nHeaders[k.toString().toLocaleLowerCase()] = mergedHeaders[k];
+		let lc = k.toString().toLocaleLowerCase();
+                nHeaders[lc in nHeaders ? lc : k.toString()] = mergedHeaders[k];
             }
         }
         return nHeaders;
