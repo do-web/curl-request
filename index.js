@@ -161,10 +161,14 @@ module.exports = function () {
                     resolve({statusCode, body, headers});
                 });
 
-                this.curl.on('error', () => {
+                this.curl.on('error', (message, code) => {
+
+                    let error = new Error(message);
+                    error.code = code;
+
                     this.curl.close();
                     this._reset();
-                    reject(arguments);
+                    reject(error);
                 });
                 this.curl.perform();
             } catch (e) {
